@@ -1,0 +1,17 @@
+{
+    "name": "Atom-syntax-highlighting-for-Storyscript",
+    "version": "0.1.0",
+    "description": "Syntax highlighting for Storyscript in Atom IDE",
+    "homepage": "https://github.com/storyscript/syntax-highlighter",
+    "license": "MIT",
+    "engines": {
+      "atom": ">0.100.0"
+    },
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/storyscript/syntax-highlighter.git"
+    },
+    "bugs": {
+      "url": "https://github.com/storyscript/syntax-highlighter/issues"
+    }
+  }

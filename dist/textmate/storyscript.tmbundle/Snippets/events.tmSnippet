@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>content</key>
+	<string>when ${1:serice} ${2:action} ${3:event} ${4:key}:${5:value} as event
+	${0:# ...}</string>
+	<key>name</key>
+	<string>Event Handler</string>
+	<key>scope</key>
+	<string>source.story</string>
+	<key>tabTrigger</key>
+	<string>when</string>
+	<key>uuid</key>
+	<string>08A8067B-8090-4A8F-8AEC-5C1F48041DA2</string>
+</dict>
+</plist>

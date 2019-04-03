@@ -1,0 +1,383 @@
+%YAML 1.2
+---
+name: Storyscript
+scope: source.Storyscript
+file_extensions: [ story, storyscript ]
+
+contexts:
+  main:
+    - include: multi_line_comment
+    - include: comment
+    - include: keyword
+    - include: assignment
+    - include: scope
+    - include: function
+    - include: something
+    - match: '(.)'
+      captures:
+        0: text.Storyscript
+  variable:
+    - match: '([\w_]+)'
+      captures:
+        0: meta.identifier.Storyscript
+    - match: '(.)'
+      captures:
+        0: text.Storyscript
+  varattr:
+    - match: '(\.[\w_]+)'
+      captures:
+        0: meta.identifier.Storyscript
+    - match: '(.)'
+      captures:
+        0: text.Storyscript
+  keyword:
+    - match: '(break|as|catch|returns?|continue|else|finally|if|then|try|when|while|foreach|pass|import)'
+      captures:
+        0: keyword.control.flow.Storyscript
+    - match: '(.)'
+      captures:
+        0: text.Storyscript
+  function:
+    - match: '(function)'
+      captures:
+        0: support.function.Storyscript
+      push: 
+        - match: '((?!function\s*)\w+)'
+          pop: true
+          captures:
+            0: entity.name.function.Storyscript
+        - match: '(.)'
+          captures:
+            0: support.function.Storyscript
+    - match: '(.)'
+      captures:
+        0: text.Storyscript
+  comment:
+    - match: '(#.*)'
+      captures:
+        0: comment.Storyscript
+    - match: '(.)'
+      captures:
+        0: text.Storyscript
+  illegal:
+    - match: '([^\s])'
+      captures:
+        0: invalid.Storyscript
+    - match: '(.)'
+      captures:
+        0: text.Storyscript
+  type:
+    - match: '(int|string|boolean|map|list|object)'
+      captures:
+        0: support.type.Storyscript
+    - match: '(.)'
+      captures:
+        0: text.Storyscript
+  comparison:
+    - match: '(<\=|>\=|\=\=|<|>|\!\=)'
+      captures:
+        0: keyword.operator.comparison.Storyscript
+    - match: '(.)'
+      captures:
+        0: text.Storyscript
+  arithmetic:
+    - match: '(\+|\-|\*|\*\*|/|//|%|<<|>>|&|\||\^|~|(?!^)@)'
+      captures:
+        0: keyword.operator.arithmetic.Storyscript
+    - match: '(.)'
+      captures:
+        0: text.Storyscript
+  assignment:
+    - match: '(=)'
+      captures:
+        0: keyword.operator.assignment.Storyscript
+    - match: '(.)'
+      captures:
+        0: text.Storyscript
+  numeric:
+    - match: '\b((0([box])[0-9a-fA-F]+)|([0-9]+(\.[0-9]+)?(e[\x{002b}\-]?[0-9]+)?))\b'
+      captures:
+        0: constant.numeric.Storyscript
+    - match: '(.)'
+      captures:
+        0: text.Storyscript
+  placeholder:
+    - match: '(\{\s*)'
+      captures:
+        0: string.punctuation.Storyscript
+      push: 
+        - match: '(\s*\})'
+          pop: true
+          captures:
+            0: string.punctuation.Storyscript
+        - include: something
+        - match: '(.)'
+          captures:
+            0: text.Storyscript
+    - match: '(.)'
+      captures:
+        0: text.Storyscript
+  string_single:
+    - match: '(\'')'
+      captures:
+        0: storage.type.string.Storyscript
+      push: 
+        - match: '(\'')'
+          pop: true
+          captures:
+            0: storage.type.string.Storyscript
+        - include: string_inner
+        - match: '(.)'
+          captures:
+            0: text.Storyscript
+    - match: '(.)'
+      captures:
+        0: text.Storyscript
+  string_single_triple:
+    - match: '(\''{3})'
+      captures:
+        0: storage.type.string.Storyscript
+      push: 
+        - match: '(\''{3})'
+          pop: true
+          captures:
+            0: storage.type.string.Storyscript
+        - include: string_inner
+        - match: '(.)'
+          captures:
+            0: text.Storyscript
+    - match: '(.)'
+      captures:
+        0: text.Storyscript
+  string_double:
+    - match: '(\")'
+      captures:
+        0: storage.type.string.Storyscript
+      push: 
+        - match: '(\")'
+          pop: true
+          captures:
+            0: storage.type.string.Storyscript
+        - include: string_inner
+        - match: '(.)'
+          captures:
+            0: text.Storyscript
+    - match: '(.)'
+      captures:
+        0: text.Storyscript
+  string_double_triple:
+    - match: '(\"{3})'
+      captures:
+        0: storage.type.string.Storyscript
+      push: 
+        - match: '(\"{3})'
+          pop: true
+          captures:
+            0: storage.type.string.Storyscript
+        - include: string_inner
+        - match: '(.)'
+          captures:
+            0: text.Storyscript
+    - match: '(.)'
+      captures:
+        0: text.Storyscript
+  string_inner:
+    - match: '(\\{)'
+      captures:
+        0: storage.type.string.Storyscript
+    - include: placeholder
+    - match: '((?!\{))'
+      captures:
+        0: storage.type.string.Storyscript
+      push: 
+        - match: '(.(?!=\{))'
+          pop: true
+          captures:
+            0: storage.type.string.Storyscript
+        - match: '(.)'
+          captures:
+            0: storage.type.string.Storyscript
+    - match: '(.)'
+      captures:
+        0: text.Storyscript
+  null:
+    - match: '(null)'
+      captures:
+        0: support.constant.Storyscript
+    - match: '(.)'
+      captures:
+        0: text.Storyscript
+  boolean:
+    - match: '(true|false)'
+      captures:
+        0: constant.other.Storyscript
+    - match: '(.)'
+      captures:
+        0: text.Storyscript
+  something:
+    - include: numeric
+    - include: string_single
+    - include: string_double
+    - include: string_single_triple
+    - include: string_double_triple
+    - include: map
+    - include: null
+    - include: list
+    - include: regexp
+    - include: boolean
+    - include: comment
+    - include: keyvalue
+    - include: slug
+    - include: variable
+    - include: varattr
+    - include: scope
+    - include: comparison
+    - include: arithmetic
+    - include: illegal
+    - match: '(.)'
+      captures:
+        0: text.Storyscript
+  list:
+    - match: '(\[)'
+      captures:
+        0: punctuation.definition.array.Storyscript
+      push: 
+        - match: '(\])'
+          pop: true
+          captures:
+            0: punctuation.definition.array.Storyscript
+        - include: comma
+        - include: something
+        - match: '(.)'
+          captures:
+            0: text.Storyscript
+    - match: '(.)'
+      captures:
+        0: text.Storyscript
+  scope:
+    - match: '(\()'
+      captures:
+        0: constant.character.punctuation.Storyscript
+      push: 
+        - match: '(\))'
+          pop: true
+          captures:
+            0: constant.character.punctuation.Storyscript
+        - include: something
+        - match: '(.)'
+          captures:
+            0: text.Storyscript
+    - match: '(.)'
+      captures:
+        0: text.Storyscript
+  map:
+    - match: '(\{)'
+      captures:
+        0: punctuation.definition.Storyscript
+      push: 
+        - match: '(\})'
+          pop: true
+          captures:
+            0: punctuation.definition.Storyscript
+        - include: mapassign
+        - match: '(.)'
+          captures:
+            0: text.Storyscript
+    - match: '(.)'
+      captures:
+        0: text.Storyscript
+  comma:
+    - match: '(\,)'
+      captures:
+        0: constant.character.punctuation.Storyscript
+    - match: '(.)'
+      captures:
+        0: text.Storyscript
+  colon:
+    - match: '(\:)'
+      captures:
+        0: constant.character.punctuation.Storyscript
+    - match: '(.)'
+      captures:
+        0: text.Storyscript
+  mapassign:
+    - match: '((?=[\"\''][\w_]+[\"\'']\s*:\s*))'
+      captures:
+        0: meta.identifier.Storyscript
+      push: 
+        - match: '((?=[\,\}]))'
+          pop: true
+          captures:
+            0: meta.identifier.Storyscript
+        - include: comma
+        - include: colon
+        - include: something
+        - match: '(.)'
+          captures:
+            0: text.Storyscript
+    - match: '(.)'
+      captures:
+        0: text.Storyscript
+  slug:
+    - match: '([\w_]+[\w_-]*/[\w_]+[\w_-]*)'
+      captures:
+        0: variable.other.Storyscript
+    - match: '(.)'
+      captures:
+        0: text.Storyscript
+  regexp:
+    - match: '(\/(?![\s\x{003d}\x{002f}\x{002a}\x{002b}\x{007b}\x{007d}\x{003f}])(\\.|.)*?/[igmy]{0,4}(?![a-zA-Z0-9]))'
+      captures:
+        0: source.regexp.Storyscript
+    - match: '(.)'
+      captures:
+        0: text.Storyscript
+  keyvalue:
+    - match: '([\w_]+(?=\s*:))'
+      captures:
+        0: variable.parameter.Storyscript
+      push: 
+        - match: '(:)'
+          pop: true
+          captures:
+            0: constant.character.punctuation.Storyscript
+        - match: '(.)'
+          captures:
+            0: variable.parameter.Storyscript
+    - match: '(.)'
+      captures:
+        0: text.Storyscript
+  keytype:
+    - match: '((?=[\w_]+\s*)[\w_]+(?=\s*:\s*(int|string|boolean|map|list|object)))'
+      captures:
+        0: variable.parameter.function.Storyscript
+      push: 
+        - match: '((?!\s*:\s*(int|string|boolean|map|list|object)))'
+          pop: true
+          captures:
+            0: variable.parameter.function.Storyscript
+        - include: type
+        - match: '(:)'
+          captures:
+            0: constant.character.punctuation.Storyscript
+        - match: '(.)'
+          captures:
+            0: text.Storyscript
+    - match: '(.)'
+      captures:
+        0: text.Storyscript
+  multi_line_comment:
+    - match: '(###)'
+      captures:
+        0: comment.Storyscript
+      push: 
+        - match: '(###[^\n]*)'
+          pop: true
+          captures:
+            0: comment.Storyscript
+        - match: '(.)'
+          captures:
+            0: comment.Storyscript
+    - match: '(.)'
+      captures:
+        0: text.Storyscript

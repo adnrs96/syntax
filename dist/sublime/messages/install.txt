@@ -1,0 +1,8 @@
+Thank you for installing this Storyscript syntax highlighting package.
+
+For more information about this package please see:
+
+https://github.com/storyscript/syntax-highlighter
+
+Cheers,
+The Asnycy Crew

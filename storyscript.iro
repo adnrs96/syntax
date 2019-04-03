@@ -1,6 +1,25 @@
 #################################################################
-## Powerd by Iro -- https://eeyo.io/iro//
+## Iro
 ################################################################ 
+##
+## * Press Ctrl + '+'/'-' To Zoom in
+## * Press Ctrl + S to save and recalculate... 
+## * Documents are saved to web storage.
+## * Only one save slot supported.
+## * Matches cannot span lines.
+## * Unicode chars must be defined in \u0000 to \uffff format.
+## * All matches must be contained by a single group ( ... )
+## * Look behinds not permitted, (?<= or (?<!
+## * Look forwards are permitted (?= or (?!
+## * Constants are defined as __my_const = (......)
+## * The \= format allows unescaped regular expressions
+## * Constants referenced by match \= $${__my_const}
+## * Constants can reference other constants
+## * You are free to delete all the default scopes.
+## * Twitter : ainslec , Web: http://eeyo.io/iro
+##
+################################################################
+
 name                   = Storyscript
 file_extensions []     = story, storyscript;
 textmate_uuid          = DB4E14AE-D10C-4B28-A55E-7C895B402701
@@ -10,7 +29,7 @@ textmate_uuid          = DB4E14AE-D10C-4B28-A55E-7C895B402701
 ################################################################
 
 __TYPE \= (int|string|boolean|map|list|object)
-__WORD \= ([A-Za-z_]+[\w_]*)
+__WORD \= [\w_]+
 
 ################################################################
 ## Styles
@@ -139,17 +158,10 @@ styles [] {
    pygments_scope        = Operator
 }
 
-.punctuation : style {
-   color                 = #569cd6
-   ace_scope             = punctuation
-   textmate_scope        = punctuation
-   pygments_scope        = Punctuation
-}
-
 .placeholder : style {
    color                 = #569cd6
-   ace_scope             = string punctuation
-   textmate_scope        = string punctuation
+   ace_scope             = string.punctuation
+   textmate_scope        = string.punctuation
    pygments_scope        = String.Other
 }
 
@@ -165,6 +177,13 @@ styles [] {
    ace_scope             = keyword.operator.arithmetic
    textmate_scope        = keyword.operator.arithmetic
    pygments_scope        = Operator
+}
+
+.punctuation : style {
+   color                 = #999
+   ace_scope             = constant.character.punctuation
+   textmate_scope        = constant.character.punctuation
+   pygments_scope        = Punctuation
 }
 
 .illegal : style {
@@ -184,29 +203,41 @@ styles [] {
 contexts [] {
 
 main : context {
-
    : include "multi_line_comment" ;
    : include "comment" ;
-   
+   : include "keyword" ;
+   : include "assignment" ;
+   : include "scope" ;
+   : include "function" ;
+   : include "something" ;
+}
+
+#################################################
+## Includes
+#################################################
+variable : context {
+   : pattern {
+      regex          \= ($${__WORD})
+      styles []       = .generic;
+   }
+}
+
+varattr : context {
+   : pattern {
+      regex          \= (\.$${__WORD})
+      styles []       = .generic;
+   }
+}
+
+
+keyword : context {
    : pattern {
       regex          \= (break|as|catch|returns?|continue|else|finally|if|then|try|when|while|foreach|pass|import)
       styles []       = .keyword;
    }
+}
 
-   : include "numeric" ;
-   : include "string" ;
-   : include "map" ;
-   : include "list" ;
-   : include "null" ;
-   : include "slug" ;
-   : include "boolean" ;
-   : include "keyvalue" ;
-   : include "regexp" ;
-   : include "type" ;
-   : include "comparison" ;
-   : include "arithmetic" ;
-   : include "assignment" ;
-
+function : context {
    : inline_push {
       regex          \= (function)
       styles []       = .function;
@@ -216,36 +247,19 @@ main : context {
          styles []    = .function_name;
       }
    }
-   
-   : include "variable" ;
-   
-   : pattern {
-      regex          \= ((?!$${__WORD}\s*)=)
-      styles []       = .generic;
-   }
-
-   : pattern {
-      regex          \= ([^\s])
-      styles []       = .illegal;
-   }
-   
-   
-}
-
-#################################################
-## Includes
-#################################################
-variable : context {
-   : pattern {
-      regex          \= ($${__WORD}(\.$${__WORD})*)
-      styles []       = .generic;
-   }
 }
 
 comment : context {
    : pattern {
       regex          \= (#.*)
       styles []       = .comment;
+   }
+}
+
+illegal : context {
+   : pattern {
+      regex          \= ([^\s])
+      styles []       = .illegal;
    }
 }
 
@@ -272,7 +286,7 @@ arithmetic : context {
 
 assignment : context {
    : pattern {
-      regex          \= (\=)
+      regex          \= (=)
       styles []       = .assignment;
    }
 }
@@ -286,34 +300,77 @@ numeric : context {
 
 placeholder : context {
    : inline_push {
-      regex          \= ((?!\\)\{\s*)
+      regex          \= (\{\s*)
       styles []       = .placeholder;
       : pop {
          regex       \= (\s*\})
          styles []    = .placeholder;
       }
-      : include "keyvalue" ;
-      : include "variable" ;
+      : include "something" ;
    }
 }
 
-string : context {
+string_single : context {
    : inline_push {
-      regex          \= (\"|\')
+      regex          \= (\')
       styles []       = .string;
       : pop {
-         regex       \= (\"|\')
+         regex       \= (\')
          styles []    = .string;
       }
-      : include "placeholder" ;
-      : inline_push {
-         regex          \= ((?!\{))
-         styles []       = .string;
-         default_style   = .string
-         : pop {
-            regex       \= (.(?!=\{))
-            styles []    = .string;
-         }
+      : include "string_inner" ;
+   }
+}
+
+string_single_triple : context {
+   : inline_push {
+      regex          \= (\'{3})
+      styles []       = .string;
+      : pop {
+         regex       \= (\'{3})
+         styles []    = .string;
+      }
+      : include "string_inner" ;
+   }
+}
+
+string_double : context {
+   : inline_push {
+      regex          \= (\")
+      styles []       = .string;
+      : pop {
+         regex       \= (\")
+         styles []    = .string;
+      }
+      : include "string_inner" ;
+   }
+}
+
+string_double_triple : context {
+   : inline_push {
+      regex          \= (\"{3})
+      styles []       = .string;
+      : pop {
+         regex       \= (\"{3})
+         styles []    = .string;
+      }
+      : include "string_inner" ;
+   }
+}
+
+string_inner : context {
+   : pattern {
+      regex          \= (\\{)
+      styles []       = .string;
+   }
+   : include "placeholder" ;
+   : inline_push {
+      regex          \= ((?!\{))
+      styles []       = .string;
+      default_style   = .string
+      : pop {
+         regex       \= (.(?!=\{))
+         styles []    = .string;
       }
    }
 }
@@ -332,6 +389,28 @@ boolean : context {
    }
 }
 
+something : context {
+   : include "numeric" ;
+   : include "string_single" ;
+   : include "string_double" ;
+   : include "string_single_triple" ;
+   : include "string_double_triple" ;
+   : include "map" ;
+   : include "null" ;
+   : include "list" ;
+   : include "regexp" ;
+   : include "boolean" ;
+   : include "comment" ;
+   : include "keyvalue" ;
+   : include "slug" ;
+   : include "variable" ;
+   : include "varattr" ;
+   : include "scope" ;
+   : include "comparison" ;
+   : include "arithmetic" ;
+   : include "illegal" ;
+}
+
 list : context {
    : inline_push {
       regex          \= (\[)
@@ -340,15 +419,20 @@ list : context {
          regex       \= (\])
          styles []    = .bracket;
       }
-      : include "numeric" ;
-      : include "string" ;
-      : include "map" ;
-      : include "null" ;
-      : include "list" ;
-      : include "regexp" ;
-      : include "boolean" ;
-      : include "comment" ;
-      : include "variable" ;
+      : include "comma" ;
+      : include "something" ;
+   }
+}
+
+scope : context {
+   : inline_push {
+      regex          \= (\()
+      styles []       = .punctuation;
+      : pop {
+         regex       \= (\))
+         styles []    = .punctuation;
+      }
+      : include "something" ;
    }
 }
 
@@ -360,21 +444,42 @@ map : context {
          regex       \= (\})
          styles []    = .brace;
       }
-      : include "numeric" ;
-      : include "string" ;
-      : include "map" ;
-      : include "null" ;
-      : include "list" ;
-      : include "regexp" ;
-      : include "boolean" ;
-      : include "comment" ;
-      : include "variable" ;
+      : include "mapassign" ;
+   }
+}
+
+comma : context {
+   : pattern {
+      regex       \= (\,)
+      styles []    = .punctuation;
+   }
+}
+
+colon : context {
+   : pattern {
+      regex       \= (\:)
+      styles []    = .punctuation;
+   }
+}
+
+mapassign : context {
+   description        = mapassign
+   : inline_push {
+      regex          \= ((?=[\"\']$${__WORD}[\"\']\s*:\s*))
+      styles []       = .generic;
+      : pop {
+         regex       \= ((?=[\,\}]))
+         styles []    = .generic;
+      }
+      : include "comma" ;
+      : include "colon" ;
+      : include "something" ;
    }
 }
 
 slug : context {
    : pattern {
-      regex          \= (\w+\/\w+)
+      regex          \= ([\w_]+[\w_-]*/[\w_]+[\w_-]*)
       styles []       = .slug;
    }
 }
@@ -402,7 +507,7 @@ keyvalue : context {
 keytype : context {
    description        = keytype
    : inline_push {
-      regex          \= ($${__WORD}(?=\s*:\s*$${__TYPE}))
+      regex          \= ((?=$${__WORD}\s*)$${__WORD}(?=\s*:\s*$${__TYPE}))
       styles []       = .keytype;
       : pop {
          regex       \= ((?!\s*:\s*$${__TYPE}))

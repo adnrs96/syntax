@@ -1,0 +1,3 @@
+'.source.story, .source.storyscript':
+  'editor':
+    'commentStart': '# '
