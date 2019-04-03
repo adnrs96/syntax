@@ -1,0 +1,432 @@
+#################################################################
+## Powerd by Iro -- https://eeyo.io/iro//
+################################################################ 
+name                   = Storyscript
+file_extensions []     = story, storyscript;
+textmate_uuid          = DB4E14AE-D10C-4B28-A55E-7C895B402701
+
+################################################################
+## Constants
+################################################################
+
+__TYPE \= (int|string|boolean|map|list|object)
+__WORD \= ([A-Za-z_]+[\w_]*)
+
+################################################################
+## Styles
+################################################################
+
+styles [] {
+
+.comment : style {
+   color                 = #6a9955
+   italic                = true
+   ace_scope             = comment
+   textmate_scope        = comment
+   pygments_scope        = Comment
+}
+
+.keyvalue : style {
+   color    = #9cdcfe
+   ace_scope             = variable.parameter
+   textmate_scope        = variable.parameter
+   pygments_scope        = Name
+}
+
+.keytype : style {
+   color                 = #9cdcfe
+   ace_scope             = variable.parameter.function
+   textmate_scope        = variable.parameter.function
+   pygments_scope        = Name
+}
+
+.function : style {
+   color                 = #569cd6
+   ace_scope             = support.function
+   textmate_scope        = support.function
+   pygments_scope        = Keyword
+}
+
+.regexp : style {
+   color                = #d16969
+   italic               = true
+   ace_scope            = source.regexp
+   textmate_scope       = source.regexp
+   pygments_scope       = String.Regex
+}
+
+.function_name : style {
+   color                = #dcdcaa
+   ace_scope             = entity.name.function
+   textmate_scope        = entity.name.function
+   pygments_scope        = Name.Function
+}
+
+.type : style {
+   color                = #4ec9b0
+   ace_scope            = support.type
+   textmate_scope       = support.type
+   pygments_scope       = Keyword.Type
+}
+
+.null : style {
+   color                = #569cd6
+   ace_scope            = support.constant
+   textmate_scope       = support.constant
+   pygments_scope       = Keyword.Constant
+}
+
+.slug : style {
+   color                = cyan
+   ace_scope            = variable.other
+   textmate_scope       = variable.other
+   pygments_scope       = Name.Variable
+}
+
+.brace : style {
+   color                = white
+   ace_scope            = punctuation.definition
+   textmate_scope       = punctuation.definition
+   pygments_scope       = Punctuation
+}
+
+.bracket : style {
+   color                = white
+   ace_scope            = punctuation.definition.array
+   textmate_scope       = punctuation.definition.array
+   pygments_scope       = Punctuation
+}
+
+.boolean : style {
+   color                = #569cd6
+   ace_scope            = constant.other
+   textmate_scope       = constant.other
+   pygments_scope       = Keyword.Constant
+}
+
+.keyword : style {
+   color                = #c586c0
+   ace_scope            = keyword.control.flow
+   textmate_scope       = keyword.control.flow
+   pygments_scope       = Keyword
+}
+
+.numeric : style {
+   color                 = #b5cea8
+   ace_scope             = constant.numeric
+   textmate_scope        = constant.numeric
+   pygments_scope        = Number
+}
+
+.string : style {
+   color                 = #ce9178
+   ace_scope             = storage.type.string
+   textmate_scope        = storage.type.string
+   pygments_scope        = String
+}
+
+.generic : style {
+   color                 = white
+   ace_scope             = meta.identifier
+   textmate_scope        = meta.identifier
+   pygments_scope        = Generic
+}
+
+.assignment : style {
+   color                 = #999
+   ace_scope             = keyword.operator.assignment
+   textmate_scope        = keyword.operator.assignment
+   pygments_scope        = Operator
+}
+
+.punctuation : style {
+   color                 = #569cd6
+   ace_scope             = punctuation
+   textmate_scope        = punctuation
+   pygments_scope        = Punctuation
+}
+
+.placeholder : style {
+   color                 = #569cd6
+   ace_scope             = string punctuation
+   textmate_scope        = string punctuation
+   pygments_scope        = String.Other
+}
+
+.comparison : style {
+   color                 = #999
+   ace_scope             = keyword.operator.comparison
+   textmate_scope        = keyword.operator.comparison
+   pygments_scope        = Operator
+}
+
+.arithmetic : style {
+   color                 = #999
+   ace_scope             = keyword.operator.arithmetic
+   textmate_scope        = keyword.operator.arithmetic
+   pygments_scope        = Operator
+}
+
+.illegal : style {
+   color                 = white
+   background_color      = red
+   ace_scope             = invalid
+   textmate_scope        = invalid
+   pygments_scope        = Generic.Error
+}
+
+}
+
+#################################################
+## Parse contexts
+#################################################
+
+contexts [] {
+
+main : context {
+
+   : include "multi_line_comment" ;
+   : include "comment" ;
+   
+   : pattern {
+      regex          \= (break|as|catch|returns?|continue|else|finally|if|then|try|when|while|foreach|pass|import)
+      styles []       = .keyword;
+   }
+
+   : include "numeric" ;
+   : include "string" ;
+   : include "map" ;
+   : include "list" ;
+   : include "null" ;
+   : include "slug" ;
+   : include "boolean" ;
+   : include "keyvalue" ;
+   : include "regexp" ;
+   : include "type" ;
+   : include "comparison" ;
+   : include "arithmetic" ;
+   : include "assignment" ;
+
+   : inline_push {
+      regex          \= (function)
+      styles []       = .function;
+      default_style   = .function
+      : pop {
+         regex       \= ((?!function\s*)\w+)
+         styles []    = .function_name;
+      }
+   }
+   
+   : include "variable" ;
+   
+   : pattern {
+      regex          \= ((?!$${__WORD}\s*)=)
+      styles []       = .generic;
+   }
+
+   : pattern {
+      regex          \= ([^\s])
+      styles []       = .illegal;
+   }
+   
+   
+}
+
+#################################################
+## Includes
+#################################################
+variable : context {
+   : pattern {
+      regex          \= ($${__WORD}(\.$${__WORD})*)
+      styles []       = .generic;
+   }
+}
+
+comment : context {
+   : pattern {
+      regex          \= (#.*)
+      styles []       = .comment;
+   }
+}
+
+type : context {
+   : pattern {
+      regex          \= $${__TYPE}
+      styles []       = .type;
+   }
+}
+
+comparison : context {
+   : pattern {
+      regex          \= (<\=|>\=|\=\=|<|>|\!\=)
+      styles []       = .comparison;
+   }
+}
+
+arithmetic : context {
+   : pattern {
+      regex          \= (\+|\-|\*|\*\*|/|//|%|<<|>>|&|\||\^|~|(?!^)@)
+      styles []       = .arithmetic;
+   }
+}
+
+assignment : context {
+   : pattern {
+      regex          \= (\=)
+      styles []       = .assignment;
+   }
+}
+
+numeric : context {
+   : pattern {
+      regex          \= \b((0([box])[0-9a-fA-F]+)|([0-9]+(\.[0-9]+)?(e[+\-]?[0-9]+)?))\b
+      styles []       = .numeric;
+   }
+}
+
+placeholder : context {
+   : inline_push {
+      regex          \= ((?!\\)\{\s*)
+      styles []       = .placeholder;
+      : pop {
+         regex       \= (\s*\})
+         styles []    = .placeholder;
+      }
+      : include "keyvalue" ;
+      : include "variable" ;
+   }
+}
+
+string : context {
+   : inline_push {
+      regex          \= (\"|\')
+      styles []       = .string;
+      : pop {
+         regex       \= (\"|\')
+         styles []    = .string;
+      }
+      : include "placeholder" ;
+      : inline_push {
+         regex          \= ((?!\{))
+         styles []       = .string;
+         default_style   = .string
+         : pop {
+            regex       \= (.(?!=\{))
+            styles []    = .string;
+         }
+      }
+   }
+}
+
+null : context {
+   : pattern {
+      regex          \= (null)
+      styles []      = .null;
+   }
+}
+
+boolean : context {
+   : pattern {
+      regex          \= (true|false)
+      styles []      = .boolean;
+   }
+}
+
+list : context {
+   : inline_push {
+      regex          \= (\[)
+      styles []       = .bracket;
+      : pop {
+         regex       \= (\])
+         styles []    = .bracket;
+      }
+      : include "numeric" ;
+      : include "string" ;
+      : include "map" ;
+      : include "null" ;
+      : include "list" ;
+      : include "regexp" ;
+      : include "boolean" ;
+      : include "comment" ;
+      : include "variable" ;
+   }
+}
+
+map : context {
+   : inline_push {
+      regex          \= (\{)
+      styles []       = .brace;
+      : pop {
+         regex       \= (\})
+         styles []    = .brace;
+      }
+      : include "numeric" ;
+      : include "string" ;
+      : include "map" ;
+      : include "null" ;
+      : include "list" ;
+      : include "regexp" ;
+      : include "boolean" ;
+      : include "comment" ;
+      : include "variable" ;
+   }
+}
+
+slug : context {
+   : pattern {
+      regex          \= (\w+\/\w+)
+      styles []       = .slug;
+   }
+}
+
+regexp : context {
+   : pattern {
+      regex          \= (\/(?![\s=/*+{}?])(\\.|.)*?/[igmy]{0,4}(?![a-zA-Z0-9]))
+      styles []      = .regexp;
+   }
+}
+
+keyvalue : context {
+   description        = keyvalue
+   : inline_push {
+      regex          \= ($${__WORD}(?=\s*:))
+      styles []       = .keyvalue;
+      default_style   = .keyvalue
+      : pop {
+         regex       \= (:)
+         styles []    = .punctuation;
+      }
+   }
+}
+
+keytype : context {
+   description        = keytype
+   : inline_push {
+      regex          \= ($${__WORD}(?=\s*:\s*$${__TYPE}))
+      styles []       = .keytype;
+      : pop {
+         regex       \= ((?!\s*:\s*$${__TYPE}))
+         styles []    = .keytype;
+      }
+      : include "type" ;
+      : pattern {
+         regex       \= (:)
+         styles []    = .punctuation;
+      }
+   }
+}
+
+multi_line_comment : context {
+   description        = multiline
+   : inline_push {
+      regex          \= (###)
+      styles []       = .comment;
+      default_style   = .comment
+      : pop {
+         regex       \= (###[^\n]*)
+         styles []    = .comment;
+      }
+   }
+}
+   
+}
