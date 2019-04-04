@@ -3,12 +3,12 @@
 <img width="796" alt="Screen Shot 2019-04-04 at 11 14 16" src="https://user-images.githubusercontent.com/2041757/55544177-d34e0900-56ca-11e9-9c90-56e008eaf107.png">
 
 ## Usage
-This package is distributed with various Asyncy IDE extensions. It uses Iro, a DSL for generating cross-platform syntax highlighting.
+This package is distributed with various Asyncy IDE extensions. It uses [Iro](https://eeyo.io/iro//), a DSL for generating cross-platform syntax highlighting.
 
 ## Development
-1. Navigate to [Iro][0] in your prefered web browser.
+1. Navigate to [Iro](https://eeyo.io/iro//) in your prefered web browser.
 1. Copy and paste the contents of [`storyscript.iro`](https://github.com/storyscript/syntax-highlighter/blob/master/storyscript.iro) into Iro, the left most pannel.
-1. Copy the contents of [`syntax.story`](https://github.com/storyscript/syntax-highlighter/blob/master/syntax.story) to get a complete example of Storyscript syntax for testing.
+1. Copy the contents of [`syntax.story`](https://github.com/storyscript/syntax-highlighter/blob/master/syntax.story) into the top right of Iro which gives you a complete example of Storyscript syntax for testing.
 1. Make changes to the Iro file.
 1. Tap `cntr-s` to save and preview changes on the bottom right.
 
@@ -35,3 +35,6 @@ The following files must be updated:
 ## Resources
 - [TextMate Language Grammer](https://macromates.com/manual/en/language_grammars)
 - [Regexp Online Matcher](https://regex101.com/)
+
+## Special Thanks
+- @ainslec for building Iro :rocket:
