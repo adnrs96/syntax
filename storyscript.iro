@@ -391,6 +391,7 @@ something : context {
    : include "string_single" ;
    : include "string_double" ;
    : include "map" ;
+   : include "type" ;
    : include "null" ;
    : include "list" ;
    : include "regexp" ;
