@@ -31,7 +31,7 @@ contexts:
       captures:
         0: text.Storyscript
   keyword:
-    - match: '(break|as|catch|returns?|continue|else|finally|if|then|try|when|while|foreach|pass|import)'
+    - match: '(break|as|catch|returns?|continue|else|finally|if|then|try|when|while|foreach|and|or)'
       captures:
         0: keyword.control.flow.Storyscript
     - match: '(.)'
@@ -102,6 +102,9 @@ contexts:
       captures:
         0: text.Storyscript
   placeholder:
+    - match: '(\\{)'
+      captures:
+        0: storage.type.string.Storyscript
     - match: '(\{\s*)'
       captures:
         0: string.punctuation.Storyscript
@@ -210,6 +213,7 @@ contexts:
     - include: string_single
     - include: string_double
     - include: map
+    - include: type
     - include: null
     - include: list
     - include: regexp
@@ -268,7 +272,9 @@ contexts:
           pop: true
           captures:
             0: punctuation.definition.Storyscript
-        - include: mapassign
+        - include: comma
+        - include: colon
+        - include: something
         - match: '(.)'
           captures:
             0: text.Storyscript
@@ -286,24 +292,6 @@ contexts:
     - match: '(\:)'
       captures:
         0: constant.character.punctuation.Storyscript
-    - match: '(.)'
-      captures:
-        0: text.Storyscript
-  mapassign:
-    - match: '((?=[\"\''][\w_]+[\"\'']\s*:\s*))'
-      captures:
-        0: meta.identifier.Storyscript
-      push: 
-        - match: '((?=[\,\}]))'
-          pop: true
-          captures:
-            0: meta.identifier.Storyscript
-        - include: comma
-        - include: colon
-        - include: something
-        - match: '(.)'
-          captures:
-            0: text.Storyscript
     - match: '(.)'
       captures:
         0: text.Storyscript

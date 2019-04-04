@@ -22,7 +22,7 @@ define(function(require, exports, module) {
       },
       {
          "token" : "keyword.control.flow",
-         "regex" : "(break|as|catch|returns?|continue|else|finally|if|then|try|when|while|foreach|pass|import)"
+         "regex" : "(break|as|catch|returns?|continue|else|finally|if|then|try|when|while|foreach|and|or)"
       },
       {
          "token" : "keyword.operator.assignment",
@@ -66,6 +66,10 @@ define(function(require, exports, module) {
          "token" : "punctuation.definition",
          "regex" : "(\\{)",
          "push" : "map__1"
+      },
+      {
+         "token" : "support.type",
+         "regex" : "(int|string|boolean|map|list|object)"
       },
       {
          "token" : "support.constant",
@@ -204,6 +208,10 @@ define(function(require, exports, module) {
          "push" : "map__1"
       },
       {
+         "token" : "support.type",
+         "regex" : "(int|string|boolean|map|list|object)"
+      },
+      {
          "token" : "support.constant",
          "regex" : "(null)"
       },
@@ -269,21 +277,6 @@ define(function(require, exports, module) {
          "next" : "pop"
       },
       {
-         "token" : "meta.identifier",
-         "regex" : "((?=[\\\"\\'][\\w_]+[\\\"\\']\\s*:\\s*))",
-         "push" : "mapassign__1"
-      },
-      {
-         defaultToken : "text",
-      }
-   ], 
-   "mapassign__1" : [
-      {
-         "token" : "meta.identifier",
-         "regex" : "((?=[\\,\\}]))",
-         "next" : "pop"
-      },
-      {
          "token" : "constant.character.punctuation",
          "regex" : "(\\,)"
       },
@@ -319,6 +312,10 @@ define(function(require, exports, module) {
          "token" : "punctuation.definition",
          "regex" : "(\\{)",
          "push" : "map__1"
+      },
+      {
+         "token" : "support.type",
+         "regex" : "(int|string|boolean|map|list|object)"
       },
       {
          "token" : "support.constant",
@@ -425,6 +422,10 @@ define(function(require, exports, module) {
          "push" : "map__1"
       },
       {
+         "token" : "support.type",
+         "regex" : "(int|string|boolean|map|list|object)"
+      },
+      {
          "token" : "support.constant",
          "regex" : "(null)"
       },
@@ -519,6 +520,10 @@ define(function(require, exports, module) {
          "push" : "map__1"
       },
       {
+         "token" : "support.type",
+         "regex" : "(int|string|boolean|map|list|object)"
+      },
+      {
          "token" : "support.constant",
          "regex" : "(null)"
       },
@@ -584,6 +589,10 @@ define(function(require, exports, module) {
          "next" : "pop"
       },
       {
+         "token" : "storage.type.string",
+         "regex" : "(\\\\{)"
+      },
+      {
          "token" : "string.punctuation",
          "regex" : "(\\{\\s*)",
          "push" : "placeholder__1"
@@ -601,6 +610,10 @@ define(function(require, exports, module) {
          "token" : "storage.type.string",
          "regex" : "(\\\"{3})",
          "next" : "pop"
+      },
+      {
+         "token" : "storage.type.string",
+         "regex" : "(\\\\{)"
       },
       {
          "token" : "string.punctuation",
@@ -622,6 +635,10 @@ define(function(require, exports, module) {
          "next" : "pop"
       },
       {
+         "token" : "storage.type.string",
+         "regex" : "(\\\\{)"
+      },
+      {
          "token" : "string.punctuation",
          "regex" : "(\\{\\s*)",
          "push" : "placeholder__1"
@@ -639,6 +656,10 @@ define(function(require, exports, module) {
          "token" : "storage.type.string",
          "regex" : "(\\'{3})",
          "next" : "pop"
+      },
+      {
+         "token" : "storage.type.string",
+         "regex" : "(\\\\{)"
       },
       {
          "token" : "string.punctuation",

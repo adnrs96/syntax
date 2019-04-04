@@ -247,7 +247,7 @@
       <array> 
         <dict>
           <key>match</key>
-          <string>(break|as|catch|returns?|continue|else|finally|if|then|try|when|while|foreach|pass|import)</string>
+          <string>(break|as|catch|returns?|continue|else|finally|if|then|try|when|while|foreach|and|or)</string>
           <key>name</key>
           <string>keyword.control.flow.Storyscript</string>
         </dict>
@@ -343,51 +343,6 @@
       <array> 
         <dict>
           <key>include</key>
-          <string>#mapassign</string>
-        </dict>
-       </array>
-    </dict>
-    <key>mapassign</key>
-    <dict>
-      <key>patterns</key>
-      <array> 
-        <dict>
-          <key>begin</key>
-          <string>((?=[\&quot;\&apos;][\w_]+[\&quot;\&apos;]\s*:\s*))</string>
-          <key>beginCaptures</key>
-          <dict>
-            <key>1</key>
-            <dict>
-              <key>name</key>
-              <string>meta.identifier.Storyscript</string>
-            </dict>
-          </dict>
-          <key>patterns</key>
-          <array> 
-            <dict>
-              <key>include</key>
-              <string>#mapassign__1</string>
-            </dict>
-           </array>
-          <key>end</key>
-          <string>((?=[\,\}]))</string>
-          <key>endCaptures</key>
-          <dict>
-            <key>1</key>
-            <dict>
-              <key>name</key>
-              <string>meta.identifier.Storyscript</string>
-            </dict>
-          </dict>
-        </dict>
-       </array>
-    </dict>
-    <key>mapassign__1</key>
-    <dict>
-      <key>patterns</key>
-      <array> 
-        <dict>
-          <key>include</key>
           <string>#comma</string>
         </dict>
         <dict>
@@ -464,6 +419,12 @@
     <dict>
       <key>patterns</key>
       <array> 
+        <dict>
+          <key>match</key>
+          <string>(\\{)</string>
+          <key>name</key>
+          <string>storage.type.string.Storyscript</string>
+        </dict>
         <dict>
           <key>begin</key>
           <string>(\{\s*)</string>
@@ -601,6 +562,10 @@
         <dict>
           <key>include</key>
           <string>#map</string>
+        </dict>
+        <dict>
+          <key>include</key>
+          <string>#type</string>
         </dict>
         <dict>
           <key>include</key>

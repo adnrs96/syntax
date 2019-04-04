@@ -160,7 +160,7 @@
   'keyword' : {
     'patterns' : [
       {
-        'match' : '(break|as|catch|returns?|continue|else|finally|if|then|try|when|while|foreach|pass|import)'
+        'match' : '(break|as|catch|returns?|continue|else|finally|if|then|try|when|while|foreach|and|or)'
         'name' : 'keyword.control.flow.Storyscript'
       }
     ]
@@ -224,36 +224,6 @@
   'map__1' : {
     'patterns' : [
       {
-        'include' : '#mapassign'
-      }
-    ]
-  }
-  'mapassign' : {
-    'patterns' : [
-      {
-        'begin' : '((?=[\\"\\\'][\\w_]+[\\"\\\']\\s*:\\s*))'
-        'beginCaptures' : {
-          '1' : {
-            'name' : 'meta.identifier.Storyscript'
-          }
-        }
-        'patterns' : [
-          {
-            'include' : '#mapassign__1'
-          }
-        ]
-        'end' : '((?=[\\,\\}]))'
-        'endCaptures' : {
-          '1' : {
-            'name' : 'meta.identifier.Storyscript'
-          }
-        }
-      }
-    ]
-  }
-  'mapassign__1' : {
-    'patterns' : [
-      {
         'include' : '#comma'
       }
       {
@@ -305,6 +275,10 @@
   }
   'placeholder' : {
     'patterns' : [
+      {
+        'match' : '(\\\\{)'
+        'name' : 'storage.type.string.Storyscript'
+      }
       {
         'begin' : '(\\{\\s*)'
         'beginCaptures' : {
@@ -398,6 +372,9 @@
       }
       {
         'include' : '#map'
+      }
+      {
+        'include' : '#type'
       }
       {
         'include' : '#null'
