@@ -299,6 +299,10 @@ numeric : context {
 }
 
 placeholder : context {
+   : pattern {
+      regex          \= (\\{)
+      styles []       = .string;
+   }
    : inline_push {
       regex          \= (\{\s*)
       styles []       = .placeholder;
