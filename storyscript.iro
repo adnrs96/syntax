@@ -444,7 +444,9 @@ map : context {
          regex       \= (\})
          styles []    = .brace;
       }
-      : include "mapassign" ;
+      : include "comma" ;
+      : include "colon" ;
+      : include "something" ;
    }
 }
 
@@ -459,21 +461,6 @@ colon : context {
    : pattern {
       regex       \= (\:)
       styles []    = .punctuation;
-   }
-}
-
-mapassign : context {
-   description        = mapassign
-   : inline_push {
-      regex          \= ((?=[\"\']$${__WORD}[\"\']\s*:\s*))
-      styles []       = .generic;
-      : pop {
-         regex       \= ((?=[\,\}]))
-         styles []    = .generic;
-      }
-      : include "comma" ;
-      : include "colon" ;
-      : include "something" ;
    }
 }
 
