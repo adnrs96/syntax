@@ -27,9 +27,13 @@ team/service-slug1 action key : value key:value
 
 # Maps
 {
-    "a": 1 == 2, # comment
+    "a": 1 == 2, # this is not commented out :(
+    'c': 1, # domm
+    'd': [123] #com
     "b": owner/repo action key:value # comment
 }
+
+
 {"a": (owner/repo action key:value)}
 
 # Operations
@@ -62,8 +66,9 @@ when service action event
 'st{  do this key:value  }in{foobar}g'
 
 """
-Long {strings}
+Long {strings} \{ok}
 \{escaped placeholder}
+ \{hello}
 """
 
 '''
@@ -76,6 +81,12 @@ Long {strings}
 
 # Types
 int string function null boolean map list object
+
+# Keyword
+and or
+when return returns as foreach
+while if else try catch finally
+break continue
 
 # Puncuation
 ((a) .y['1'])[1]
