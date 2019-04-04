@@ -182,21 +182,10 @@ contexts:
       captures:
         0: text.Storyscript
   string_inner:
-    - match: '(\\{)'
-      captures:
-        0: storage.type.string.Storyscript
     - include: placeholder
-    - match: '((?!\{))'
+    - match: '(.)'
       captures:
         0: storage.type.string.Storyscript
-      push: 
-        - match: '(.(?!=\{))'
-          pop: true
-          captures:
-            0: storage.type.string.Storyscript
-        - match: '(.)'
-          captures:
-            0: storage.type.string.Storyscript
     - match: '(.)'
       captures:
         0: text.Storyscript
@@ -216,10 +205,10 @@ contexts:
         0: text.Storyscript
   something:
     - include: numeric
-    - include: string_single
-    - include: string_double
     - include: string_single_triple
     - include: string_double_triple
+    - include: string_single
+    - include: string_double
     - include: map
     - include: null
     - include: list

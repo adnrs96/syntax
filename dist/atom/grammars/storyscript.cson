@@ -385,16 +385,16 @@
         'include' : '#numeric'
       }
       {
-        'include' : '#string_single'
-      }
-      {
-        'include' : '#string_double'
-      }
-      {
         'include' : '#string_single_triple'
       }
       {
         'include' : '#string_double_triple'
+      }
+      {
+        'include' : '#string_single'
+      }
+      {
+        'include' : '#string_double'
       }
       {
         'include' : '#map'
@@ -503,31 +503,12 @@
   'string_inner' : {
     'patterns' : [
       {
-        'match' : '(\\\\{)'
-        'name' : 'storage.type.string.Storyscript'
-      }
-      {
         'include' : '#placeholder'
       }
       {
-        'begin' : '((?!\\{))'
-        'beginCaptures' : {
-          '1' : {
-            'name' : 'storage.type.string.Storyscript'
-          }
-        }
-        'contentName' : 'storage.type.string.Storyscript'
-        'end' : '(.(?!=\\{))'
-        'endCaptures' : {
-          '1' : {
-            'name' : 'storage.type.string.Storyscript'
-          }
-        }
+        'match' : '(.)'
+        'name' : 'storage.type.string.Storyscript'
       }
-    ]
-  }
-  'string_inner__1' : {
-    'patterns' : [
     ]
   }
   'string_single' : {

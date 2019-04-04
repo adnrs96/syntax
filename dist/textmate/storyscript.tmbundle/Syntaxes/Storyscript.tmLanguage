@@ -584,19 +584,19 @@
         </dict>
         <dict>
           <key>include</key>
-          <string>#string_single</string>
-        </dict>
-        <dict>
-          <key>include</key>
-          <string>#string_double</string>
-        </dict>
-        <dict>
-          <key>include</key>
           <string>#string_single_triple</string>
         </dict>
         <dict>
           <key>include</key>
           <string>#string_double_triple</string>
+        </dict>
+        <dict>
+          <key>include</key>
+          <string>#string_single</string>
+        </dict>
+        <dict>
+          <key>include</key>
+          <string>#string_double</string>
         </dict>
         <dict>
           <key>include</key>
@@ -751,45 +751,15 @@
       <key>patterns</key>
       <array> 
         <dict>
-          <key>match</key>
-          <string>(\\{)</string>
-          <key>name</key>
-          <string>storage.type.string.Storyscript</string>
-        </dict>
-        <dict>
           <key>include</key>
           <string>#placeholder</string>
         </dict>
         <dict>
-          <key>begin</key>
-          <string>((?!\{))</string>
-          <key>beginCaptures</key>
-          <dict>
-            <key>1</key>
-            <dict>
-              <key>name</key>
-              <string>storage.type.string.Storyscript</string>
-            </dict>
-          </dict>
-          <key>contentName</key>
+          <key>match</key>
+          <string>(.)</string>
+          <key>name</key>
           <string>storage.type.string.Storyscript</string>
-          <key>end</key>
-          <string>(.(?!=\{))</string>
-          <key>endCaptures</key>
-          <dict>
-            <key>1</key>
-            <dict>
-              <key>name</key>
-              <string>storage.type.string.Storyscript</string>
-            </dict>
-          </dict>
         </dict>
-       </array>
-    </dict>
-    <key>string_inner__1</key>
-    <dict>
-      <key>patterns</key>
-      <array> 
        </array>
     </dict>
     <key>string_single</key>

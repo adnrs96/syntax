@@ -359,19 +359,10 @@ string_double_triple : context {
 }
 
 string_inner : context {
-   : pattern {
-      regex          \= (\\{)
-      styles []       = .string;
-   }
    : include "placeholder" ;
-   : inline_push {
-      regex          \= ((?!\{))
+   : pattern {
+      regex          \= (.)
       styles []       = .string;
-      default_style   = .string
-      : pop {
-         regex       \= (.(?!=\{))
-         styles []    = .string;
-      }
    }
 }
 
@@ -391,10 +382,10 @@ boolean : context {
 
 something : context {
    : include "numeric" ;
-   : include "string_single" ;
-   : include "string_double" ;
    : include "string_single_triple" ;
    : include "string_double_triple" ;
+   : include "string_single" ;
+   : include "string_double" ;
    : include "map" ;
    : include "null" ;
    : include "list" ;
