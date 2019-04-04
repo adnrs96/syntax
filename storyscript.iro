@@ -232,7 +232,7 @@ varattr : context {
 
 keyword : context {
    : pattern {
-      regex          \= (break|as|catch|returns?|continue|else|finally|if|then|try|when|while|foreach|pass|import)
+      regex          \= (break|as|catch|returns?|continue|else|finally|if|then|try|when|while|foreach|and|or)
       styles []       = .keyword;
    }
 }
