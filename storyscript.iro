@@ -232,14 +232,14 @@ varattr : context {
 
 keyword : context {
    : pattern {
-      regex          \= (break|as|catch|returns?|continue|else|finally|if|then|try|when|while|foreach|and|or)
+      regex          \= ((?!\W)(break|as|catch|returns?|continue|else|finally|if|then|try|when|while|foreach|and|or)(\s|$))
       styles []       = .keyword;
    }
 }
 
 function : context {
    : inline_push {
-      regex          \= (function)
+      regex          \= ((?!\W)(function)(?=\s))
       styles []       = .function;
       default_style   = .function
       : pop {
@@ -265,7 +265,7 @@ illegal : context {
 
 type : context {
    : pattern {
-      regex          \= $${__TYPE}
+      regex          \= ((?!\W)$${__TYPE}((?=\W)|$))
       styles []       = .type;
    }
 }
@@ -379,7 +379,7 @@ null : context {
 
 boolean : context {
    : pattern {
-      regex          \= (true|false)
+      regex          \= ((?!\W)(true|false)(?=\s))
       styles []      = .boolean;
    }
 }
