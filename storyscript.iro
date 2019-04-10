@@ -386,7 +386,7 @@ null : context {
 
 boolean : context {
    : pattern {
-      regex          \= ((?!\W)(true|false)(?=\s))
+      regex          \= ((true|false)(?!(\s*\=|\w)))
       styles []      = .boolean;
    }
 }
