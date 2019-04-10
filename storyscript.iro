@@ -74,6 +74,13 @@ styles [] {
    pygments_scope       = String.Regex
 }
 
+.time : style {
+   color                = #d16969
+   ace_scope            = source.constant
+   textmate_scope       = source.constant
+   pygments_scope       = String.Other
+}
+
 .function_name : style {
    color                = #dcdcaa
    ace_scope             = entity.name.function
@@ -399,6 +406,7 @@ something : context {
    : include "comment" ;
    : include "keyvalue" ;
    : include "slug" ;
+   : include "time" ;
    : include "variable" ;
    : include "varattr" ;
    : include "scope" ;
@@ -471,6 +479,13 @@ regexp : context {
    : pattern {
       regex          \= (\/(?![\s=/*+{}?])(\\.|.)*?/[igmy]{0,4}(?![a-zA-Z0-9]))
       styles []      = .regexp;
+   }
+}
+
+time : context {
+   : pattern {
+      regex          \= ((\d+[smhdwqy])+)(?!(\s*\=|\w))
+      styles []      = .time;
    }
 }
 
