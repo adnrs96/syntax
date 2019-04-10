@@ -286,7 +286,7 @@ comparison : context {
 
 arithmetic : context {
    : pattern {
-      regex          \= (\+|\-|\*|\*\*|/|//|%|<<|>>|&|\||\^|~|(?!^)@)
+      regex          \= (\!|\+|\-|\*|\*\*|/|//|%|<<|>>|&|\||\^|~|(?!^)@)
       styles []       = .arithmetic;
    }
 }
