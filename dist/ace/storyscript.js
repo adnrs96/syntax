@@ -22,7 +22,7 @@ define(function(require, exports, module) {
       },
       {
          "token" : "keyword.control.flow",
-         "regex" : "(break|as|catch|returns?|continue|else|finally|if|then|try|when|while|foreach|and|or)"
+         "regex" : "((?!\\W)(break|as|catch|returns?|continue|is|not|else|finally|if|then|try|when|while|foreach|and|or)(\\s|$))"
       },
       {
          "token" : "keyword.operator.assignment",
@@ -35,7 +35,7 @@ define(function(require, exports, module) {
       },
       {
          "token" : "support.function",
-         "regex" : "(function)",
+         "regex" : "((?!\\W)(function)(?=\\s))",
          "push" : "function__1"
       },
       {
@@ -69,7 +69,7 @@ define(function(require, exports, module) {
       },
       {
          "token" : "support.type",
-         "regex" : "(int|string|boolean|map|list|object)"
+         "regex" : "((?!\\W)(int|string|boolean|map|list|object)((?=\\W)|$))"
       },
       {
          "token" : "support.constant",
@@ -86,7 +86,7 @@ define(function(require, exports, module) {
       },
       {
          "token" : "constant.other",
-         "regex" : "(true|false)"
+         "regex" : "((true|false)(?!(\\s*\\=|\\w)))"
       },
       {
          "token" : "comment",
@@ -100,6 +100,10 @@ define(function(require, exports, module) {
       {
          "token" : "variable.other",
          "regex" : "([\\w_]+[\\w_-]*/[\\w_]+[\\w_-]*)"
+      },
+      {
+         "token" : "source.constant",
+         "regex" : "((\\d+[smhdwqy])+)(?!(\\s*\\=|\\w))"
       },
       {
          "token" : "meta.identifier",
@@ -120,7 +124,7 @@ define(function(require, exports, module) {
       },
       {
          "token" : "keyword.operator.arithmetic",
-         "regex" : "(\\+|\\-|\\*|\\*\\*|/|//|%|<<|>>|&|\\||\\^|~|(?!^)@)"
+         "regex" : "(\\!|\\+|\\-|\\*|\\*\\*|/|//|%|<<|>>|&|\\||\\^|~|(?!^)@)"
       },
       {
          "token" : "invalid",
@@ -148,7 +152,7 @@ define(function(require, exports, module) {
       },
       {
          "token" : "support.type",
-         "regex" : "(int|string|boolean|map|list|object)"
+         "regex" : "((?!\\W)(int|string|boolean|map|list|object)((?=\\W)|$))"
       },
       {
          "token" : "constant.character.punctuation",
@@ -209,7 +213,7 @@ define(function(require, exports, module) {
       },
       {
          "token" : "support.type",
-         "regex" : "(int|string|boolean|map|list|object)"
+         "regex" : "((?!\\W)(int|string|boolean|map|list|object)((?=\\W)|$))"
       },
       {
          "token" : "support.constant",
@@ -226,7 +230,7 @@ define(function(require, exports, module) {
       },
       {
          "token" : "constant.other",
-         "regex" : "(true|false)"
+         "regex" : "((true|false)(?!(\\s*\\=|\\w)))"
       },
       {
          "token" : "comment",
@@ -240,6 +244,10 @@ define(function(require, exports, module) {
       {
          "token" : "variable.other",
          "regex" : "([\\w_]+[\\w_-]*/[\\w_]+[\\w_-]*)"
+      },
+      {
+         "token" : "source.constant",
+         "regex" : "((\\d+[smhdwqy])+)(?!(\\s*\\=|\\w))"
       },
       {
          "token" : "meta.identifier",
@@ -260,7 +268,7 @@ define(function(require, exports, module) {
       },
       {
          "token" : "keyword.operator.arithmetic",
-         "regex" : "(\\+|\\-|\\*|\\*\\*|/|//|%|<<|>>|&|\\||\\^|~|(?!^)@)"
+         "regex" : "(\\!|\\+|\\-|\\*|\\*\\*|/|//|%|<<|>>|&|\\||\\^|~|(?!^)@)"
       },
       {
          "token" : "invalid",
@@ -315,7 +323,7 @@ define(function(require, exports, module) {
       },
       {
          "token" : "support.type",
-         "regex" : "(int|string|boolean|map|list|object)"
+         "regex" : "((?!\\W)(int|string|boolean|map|list|object)((?=\\W)|$))"
       },
       {
          "token" : "support.constant",
@@ -332,7 +340,7 @@ define(function(require, exports, module) {
       },
       {
          "token" : "constant.other",
-         "regex" : "(true|false)"
+         "regex" : "((true|false)(?!(\\s*\\=|\\w)))"
       },
       {
          "token" : "comment",
@@ -346,6 +354,10 @@ define(function(require, exports, module) {
       {
          "token" : "variable.other",
          "regex" : "([\\w_]+[\\w_-]*/[\\w_]+[\\w_-]*)"
+      },
+      {
+         "token" : "source.constant",
+         "regex" : "((\\d+[smhdwqy])+)(?!(\\s*\\=|\\w))"
       },
       {
          "token" : "meta.identifier",
@@ -366,7 +378,7 @@ define(function(require, exports, module) {
       },
       {
          "token" : "keyword.operator.arithmetic",
-         "regex" : "(\\+|\\-|\\*|\\*\\*|/|//|%|<<|>>|&|\\||\\^|~|(?!^)@)"
+         "regex" : "(\\!|\\+|\\-|\\*|\\*\\*|/|//|%|<<|>>|&|\\||\\^|~|(?!^)@)"
       },
       {
          "token" : "invalid",
@@ -423,7 +435,7 @@ define(function(require, exports, module) {
       },
       {
          "token" : "support.type",
-         "regex" : "(int|string|boolean|map|list|object)"
+         "regex" : "((?!\\W)(int|string|boolean|map|list|object)((?=\\W)|$))"
       },
       {
          "token" : "support.constant",
@@ -440,7 +452,7 @@ define(function(require, exports, module) {
       },
       {
          "token" : "constant.other",
-         "regex" : "(true|false)"
+         "regex" : "((true|false)(?!(\\s*\\=|\\w)))"
       },
       {
          "token" : "comment",
@@ -454,6 +466,10 @@ define(function(require, exports, module) {
       {
          "token" : "variable.other",
          "regex" : "([\\w_]+[\\w_-]*/[\\w_]+[\\w_-]*)"
+      },
+      {
+         "token" : "source.constant",
+         "regex" : "((\\d+[smhdwqy])+)(?!(\\s*\\=|\\w))"
       },
       {
          "token" : "meta.identifier",
@@ -474,7 +490,7 @@ define(function(require, exports, module) {
       },
       {
          "token" : "keyword.operator.arithmetic",
-         "regex" : "(\\+|\\-|\\*|\\*\\*|/|//|%|<<|>>|&|\\||\\^|~|(?!^)@)"
+         "regex" : "(\\!|\\+|\\-|\\*|\\*\\*|/|//|%|<<|>>|&|\\||\\^|~|(?!^)@)"
       },
       {
          "token" : "invalid",
@@ -521,7 +537,7 @@ define(function(require, exports, module) {
       },
       {
          "token" : "support.type",
-         "regex" : "(int|string|boolean|map|list|object)"
+         "regex" : "((?!\\W)(int|string|boolean|map|list|object)((?=\\W)|$))"
       },
       {
          "token" : "support.constant",
@@ -538,7 +554,7 @@ define(function(require, exports, module) {
       },
       {
          "token" : "constant.other",
-         "regex" : "(true|false)"
+         "regex" : "((true|false)(?!(\\s*\\=|\\w)))"
       },
       {
          "token" : "comment",
@@ -552,6 +568,10 @@ define(function(require, exports, module) {
       {
          "token" : "variable.other",
          "regex" : "([\\w_]+[\\w_-]*/[\\w_]+[\\w_-]*)"
+      },
+      {
+         "token" : "source.constant",
+         "regex" : "((\\d+[smhdwqy])+)(?!(\\s*\\=|\\w))"
       },
       {
          "token" : "meta.identifier",
@@ -572,7 +592,7 @@ define(function(require, exports, module) {
       },
       {
          "token" : "keyword.operator.arithmetic",
-         "regex" : "(\\+|\\-|\\*|\\*\\*|/|//|%|<<|>>|&|\\||\\^|~|(?!^)@)"
+         "regex" : "(\\!|\\+|\\-|\\*|\\*\\*|/|//|%|<<|>>|&|\\||\\^|~|(?!^)@)"
       },
       {
          "token" : "invalid",

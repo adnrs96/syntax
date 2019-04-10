@@ -31,14 +31,14 @@ contexts:
       captures:
         0: text.Storyscript
   keyword:
-    - match: '(break|as|catch|returns?|continue|else|finally|if|then|try|when|while|foreach|and|or)'
+    - match: '((?!\W)(break|as|catch|returns?|continue|is|not|else|finally|if|then|try|when|while|foreach|and|or)(\s|$))'
       captures:
         0: keyword.control.flow.Storyscript
     - match: '(.)'
       captures:
         0: text.Storyscript
   function:
-    - match: '(function)'
+    - match: '((?!\W)(function)(?=\s))'
       captures:
         0: support.function.Storyscript
       push: 
@@ -67,7 +67,7 @@ contexts:
       captures:
         0: text.Storyscript
   type:
-    - match: '(int|string|boolean|map|list|object)'
+    - match: '((?!\W)(int|string|boolean|map|list|object)((?=\W)|$))'
       captures:
         0: support.type.Storyscript
     - match: '(.)'
@@ -81,7 +81,7 @@ contexts:
       captures:
         0: text.Storyscript
   arithmetic:
-    - match: '(\+|\-|\*|\*\*|/|//|%|<<|>>|&|\||\^|~|(?!^)@)'
+    - match: '(\!|\+|\-|\*|\*\*|/|//|%|<<|>>|&|\||\^|~|(?!^)@)'
       captures:
         0: keyword.operator.arithmetic.Storyscript
     - match: '(.)'
@@ -200,7 +200,7 @@ contexts:
       captures:
         0: text.Storyscript
   boolean:
-    - match: '(true|false)'
+    - match: '((true|false)(?!(\s*\=|\w)))'
       captures:
         0: constant.other.Storyscript
     - match: '(.)'
@@ -221,6 +221,7 @@ contexts:
     - include: comment
     - include: keyvalue
     - include: slug
+    - include: time
     - include: variable
     - include: varattr
     - include: scope
@@ -306,6 +307,13 @@ contexts:
     - match: '(\/(?![\s\x{003d}\x{002f}\x{002a}\x{002b}\x{007b}\x{007d}\x{003f}])(\\.|.)*?/[igmy]{0,4}(?![a-zA-Z0-9]))'
       captures:
         0: source.regexp.Storyscript
+    - match: '(.)'
+      captures:
+        0: text.Storyscript
+  time:
+    - match: '((\d+[smhdwqy])+)(?!(\s*\=|\w))'
+      captures:
+        0: source.constant.Storyscript
     - match: '(.)'
       captures:
         0: text.Storyscript

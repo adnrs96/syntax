@@ -63,7 +63,7 @@
       <array> 
         <dict>
           <key>match</key>
-          <string>(\+|\-|\*|\*\*|/|//|%|&lt;&lt;|&gt;&gt;|&amp;|\||\^|~|(?!^)@)</string>
+          <string>(\!|\+|\-|\*|\*\*|/|//|%|&lt;&lt;|&gt;&gt;|&amp;|\||\^|~|(?!^)@)</string>
           <key>name</key>
           <string>keyword.operator.arithmetic.Storyscript</string>
         </dict>
@@ -87,7 +87,7 @@
       <array> 
         <dict>
           <key>match</key>
-          <string>(true|false)</string>
+          <string>((true|false)(?!(\s*\=|\w)))</string>
           <key>name</key>
           <string>constant.other.Storyscript</string>
         </dict>
@@ -147,7 +147,7 @@
       <array> 
         <dict>
           <key>begin</key>
-          <string>(function)</string>
+          <string>((?!\W)(function)(?=\s))</string>
           <key>beginCaptures</key>
           <dict>
             <key>1</key>
@@ -247,7 +247,7 @@
       <array> 
         <dict>
           <key>match</key>
-          <string>(break|as|catch|returns?|continue|else|finally|if|then|try|when|while|foreach|and|or)</string>
+          <string>((?!\W)(break|as|catch|returns?|continue|is|not|else|finally|if|then|try|when|while|foreach|and|or)(\s|$))</string>
           <key>name</key>
           <string>keyword.control.flow.Storyscript</string>
         </dict>
@@ -597,6 +597,10 @@
         </dict>
         <dict>
           <key>include</key>
+          <string>#time</string>
+        </dict>
+        <dict>
+          <key>include</key>
           <string>#variable</string>
         </dict>
         <dict>
@@ -817,13 +821,25 @@
         </dict>
        </array>
     </dict>
+    <key>time</key>
+    <dict>
+      <key>patterns</key>
+      <array> 
+        <dict>
+          <key>match</key>
+          <string>((\d+[smhdwqy])+)(?!(\s*\=|\w))</string>
+          <key>name</key>
+          <string>source.constant.Storyscript</string>
+        </dict>
+       </array>
+    </dict>
     <key>type</key>
     <dict>
       <key>patterns</key>
       <array> 
         <dict>
           <key>match</key>
-          <string>(int|string|boolean|map|list|object)</string>
+          <string>((?!\W)(int|string|boolean|map|list|object)((?=\W)|$))</string>
           <key>name</key>
           <string>support.type.Storyscript</string>
         </dict>

@@ -33,6 +33,15 @@ team/service-slug1 action key : value key:value
     "b": owner/repo action key:value # comment
 }
 
+# not valid
+1d = x1d
+ttrue = ttrue
+astring = astring
+
+# Valid
+1d true (true)
+x = 1d
+service action a:1d1w b:true c:string
 
 {"a": (owner/repo action key:value)}
 
