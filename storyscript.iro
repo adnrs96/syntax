@@ -239,7 +239,7 @@ varattr : context {
 
 keyword : context {
    : pattern {
-      regex          \= ((?!\W)(break|as|catch|returns?|continue|is|not|else|finally|if|then|try|when|while|foreach|and|or)(\s|$))
+      regex          \= ((?!\W)(break|as|to|catch|throw|returns?|continue|is|not|else|finally|if|then|try|when|while|foreach|and|or)(\s|$))
       styles []       = .keyword;
    }
 }

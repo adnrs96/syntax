@@ -93,8 +93,8 @@ int string function null boolean object Map List regex any float
 
 # Keyword
 and or
-when return returns as foreach
-while if else try catch finally
+when return returns as to foreach
+while if else try catch throw finally
 break continue
 
 # Puncuation
