@@ -22,7 +22,7 @@ define(function(require, exports, module) {
       },
       {
          "token" : "keyword.control.flow",
-         "regex" : "((?!\\W)(break|as|catch|returns?|continue|is|not|else|finally|if|then|try|when|while|foreach|and|or)(\\s|$))"
+         "regex" : "((?!\\W)(break|as|to|catch|throw|returns?|continue|is|not|else|finally|if|then|try|when|while|foreach|and|or)(\\s|$))"
       },
       {
          "token" : "keyword.operator.assignment",
@@ -69,7 +69,7 @@ define(function(require, exports, module) {
       },
       {
          "token" : "support.type",
-         "regex" : "((?!\\W)(int|string|boolean|map|list|object)((?=\\W)|$))"
+         "regex" : "((?!\\W)(int|float|string|boolean|Map|List|object|regex|any|time)((?=\\W)|$))"
       },
       {
          "token" : "support.constant",
@@ -147,12 +147,12 @@ define(function(require, exports, module) {
    "keytype__1" : [
       {
          "token" : "variable.parameter.function",
-         "regex" : "((?!\\s*:\\s*(int|string|boolean|map|list|object)))",
+         "regex" : "((?!\\s*:\\s*(int|float|string|boolean|Map|List|object|regex|any|time)))",
          "next" : "pop"
       },
       {
          "token" : "support.type",
-         "regex" : "((?!\\W)(int|string|boolean|map|list|object)((?=\\W)|$))"
+         "regex" : "((?!\\W)(int|float|string|boolean|Map|List|object|regex|any|time)((?=\\W)|$))"
       },
       {
          "token" : "constant.character.punctuation",
@@ -213,7 +213,7 @@ define(function(require, exports, module) {
       },
       {
          "token" : "support.type",
-         "regex" : "((?!\\W)(int|string|boolean|map|list|object)((?=\\W)|$))"
+         "regex" : "((?!\\W)(int|float|string|boolean|Map|List|object|regex|any|time)((?=\\W)|$))"
       },
       {
          "token" : "support.constant",
@@ -323,7 +323,7 @@ define(function(require, exports, module) {
       },
       {
          "token" : "support.type",
-         "regex" : "((?!\\W)(int|string|boolean|map|list|object)((?=\\W)|$))"
+         "regex" : "((?!\\W)(int|float|string|boolean|Map|List|object|regex|any|time)((?=\\W)|$))"
       },
       {
          "token" : "support.constant",
@@ -435,7 +435,7 @@ define(function(require, exports, module) {
       },
       {
          "token" : "support.type",
-         "regex" : "((?!\\W)(int|string|boolean|map|list|object)((?=\\W)|$))"
+         "regex" : "((?!\\W)(int|float|string|boolean|Map|List|object|regex|any|time)((?=\\W)|$))"
       },
       {
          "token" : "support.constant",
@@ -537,7 +537,7 @@ define(function(require, exports, module) {
       },
       {
          "token" : "support.type",
-         "regex" : "((?!\\W)(int|string|boolean|map|list|object)((?=\\W)|$))"
+         "regex" : "((?!\\W)(int|float|string|boolean|Map|List|object|regex|any|time)((?=\\W)|$))"
       },
       {
          "token" : "support.constant",
