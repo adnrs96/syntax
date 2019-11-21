@@ -89,7 +89,7 @@ Long {strings}
 [1, 1.2, -1]
 
 # Types
-int string function null boolean map list object
+int string function null boolean object Map List regex any float
 
 # Keyword
 and or

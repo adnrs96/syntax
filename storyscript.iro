@@ -28,7 +28,7 @@ textmate_uuid          = DB4E14AE-D10C-4B28-A55E-7C895B402701
 ## Constants
 ################################################################
 
-__TYPE \= (int|string|boolean|map|list|object)
+__TYPE \= (int|float|string|boolean|Map|List|object|regex|any|time)
 __WORD \= [\w_]+
 
 ################################################################
